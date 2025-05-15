@@ -89,3 +89,11 @@
 .max-w-90vw{
     max-width: 90vw;
 }
+/* product detail */
+.text-logo{
+    color: #a7c6ba;
+}
+/* order */
+.order{
+    padding-top: 17px;
+}

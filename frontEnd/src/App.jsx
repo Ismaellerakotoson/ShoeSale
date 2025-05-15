@@ -11,6 +11,12 @@ import Product from './pages/client/Product'
 import Bag from './pages/client/Bag'
 import Dashboard from './pages/admin/Dashboard'
 import NavBar from './layouts/NavBar'
+import ProductManagement from './pages/admin/ProductManagement'
+import ProductDetail from './pages/admin/ProductDetail'
+import Order from './pages/admin/Order'
+import Login from './pages/admin/Login'
+import User from './pages/admin/User'
+
 
 
 function App() {
@@ -24,6 +30,11 @@ function App() {
         <Route path="/bag" element={<Bag />} />
         <Route path="/nav" element={<NavBar/>} />
         <Route path="/dashboard" element={<Dashboard/>} />
+        <Route path="/productManagement" element={<ProductManagement/>} />
+        <Route path="/detail" element={<ProductDetail/>} />
+        <Route path="/order" element={<Order/>} />
+        <Route path="/login" element={<Login/>} />
+        <Route path="/user" element={<User/>} />
       </Routes>
     </>
   )

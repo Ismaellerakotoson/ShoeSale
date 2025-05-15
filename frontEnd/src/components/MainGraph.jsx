@@ -12,7 +12,7 @@ import {
   
   export default function MainGraph() {
     return (
-      <div className="flex flex-col md:flex-row gap-4 mt-6">
+      <div className="flex flex-col max-w-screen md:flex-row gap-4 mt-6">
         
         {/* Analytic chart */}
         <div className="bg-white p-4 rounded-lg shadow-md flex-1">
