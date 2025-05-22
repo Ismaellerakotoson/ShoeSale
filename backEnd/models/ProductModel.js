@@ -10,11 +10,10 @@ const createProduct = (product, callback) => {
     db.query(sql, [nameProduct, price, brand, description, jsonFeatures, quantity, image], (err, result) => {
       if (err) {
         console.error("Erreur MySQL:", err);
-        callback(err, null);
-      } else {
-        console.log("Produit ajouté avec succès !");
-        callback(null, result);
+        return callback(err, null);
       }
+      console.log("Produit ajouté avec succès !");
+      callback(null, result);
     });
   } catch (error) {
     console.error("Erreur inattendue:", error);
@@ -22,26 +21,23 @@ const createProduct = (product, callback) => {
   }
 };
 
+const deleteProduct = (id, callback) => {
+  const sql = "DELETE FROM product WHERE idProduct = ?";
 
-const deleteProduct = (id , callback) =>{
-  const idProduct = id;
-  const sql = "DELETE FROM product WHERE idProduct = ?"
-
-  try{
-    db.query(sql, [idProduct] , (err, result)=>{
-      if (err){
+  try {
+    db.query(sql, [id], (err, result) => {
+      if (err) {
         console.error("Erreur MySQL :", err);
-        callback(err, null)
-      } else {
-        console.log("Produit supprimé avec succès !");
-        callback(null, result);
+        return callback(err, null);
       }
-    })
-  } catch (error){
-    console.err("Erreur inattendue:", error);
-    callback(error, null)
+      console.log("Produit supprimé avec succès !");
+      callback(null, result);
+    });
+  } catch (error) {
+    console.error("Erreur inattendue:", error);
+    callback(error, null);
   }
-}
+};
 
 module.exports = {
   createProduct,
