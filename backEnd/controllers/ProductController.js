@@ -1,25 +1,30 @@
 const productModel = require('../models/ProductModel');
 
 const createProduct = (req, res) => {
-  const { nameProduct, price, brand, description , features , quantity , image } = req.body;
+  const { nameProduct, price, brand, description, features, quantity } = req.body;
+  const image = req.file ? req.file.filename : null;
 
   if (!nameProduct || !price || !brand || !description || !features || !quantity || !image) {
     return res.status(400).json({ error: 'Tous les champs sont requis.' });
   }
 
   if (!Array.isArray(features)) {
-    return res.status(400).json({ error: "'features' doit être une liste (tableau)." });
+    return res.status(400).json({ error: "'features' doit être un tableau." });
   }
 
-  productModel.createProduct({ nameProduct, price, brand, description , features , quantity , image }, (err, result) => {
-    if (err) {
-      console.error('Erreur SQL:', err);
-      return res.status(500).json({ error: 'Erreur serveur.' });
-    }
+  productModel.createProduct(
+    { nameProduct, price, brand, description, features, quantity, image },
+    (err, result) => {
+      if (err) {
+        console.error('Erreur SQL:', err);
+        return res.status(500).json({ error: 'Erreur serveur.' });
+      }
 
-    res.status(201).json({ message: 'Produit créé avec succès.', productId: result.insertId });
-  });
+      res.status(201).json({ message: 'Produit créé avec succès.', productId: result.insertId });
+    }
+  );
 };
+
 
 const deleteProduct = (req, res) => {
   const idProduct = req.params.idProduct;
