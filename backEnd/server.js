@@ -3,6 +3,7 @@ const cors = require('cors');
 require('dotenv').config();
 const userRoutes = require('./routes/UserRoute');
 const productRoutes = require('./routes/ProductRoute');
+const cartRoutes = require('./routes/CartRoute')
 
 // Connexion DB
 require('./config/db');
@@ -12,7 +13,7 @@ const app = express();
 // Middleware CORS
 app.use(cors());
 
-// Middleware pour parser les données JSON (utile pour toutes les requêtes sauf multipart/form-data)
+// Middleware pour parser les données JSON
 app.use(express.json());
 
 // Middleware pour servir les fichiers statiques (images uploadées)
@@ -50,6 +51,7 @@ app.get('/', (req, res) => {
 // Routes API
 app.use('/api/user', userRoutes);
 app.use('/api/product', productRoutes);
+app.use('/api/product', cartRoutes);
 
 // Lancement du serveur
 const PORT = process.env.PORT || 5000;

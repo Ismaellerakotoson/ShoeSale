@@ -3,8 +3,10 @@ import Header from '../../layouts/Header'
 import Footer from '../../layouts/Footer'
 import product1 from '../../assets/images/p1.png'
 import product2 from '../../assets/images/p2.png'
+import { useState } from 'react'
 
 export default function Bag() {
+
   return (
     <div className="flex flex-col min-h-screen">
     <Header />
@@ -55,6 +57,7 @@ export default function Bag() {
             </div>
             <div className="flex-1">
               <div className="flex justify-between w-full">
+                <p className="f-16 font-700">Nike</p>
                 <p className="f-16 font-700">Nike</p>
                 <p className="f-16 font-700">$90.00</p>
               </div>

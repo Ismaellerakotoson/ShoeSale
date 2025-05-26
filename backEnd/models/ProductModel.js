@@ -39,7 +39,16 @@ const deleteProduct = (id, callback) => {
   }
 };
 
+const getAllProducts = (callback) => {
+  const sql = 'SELECT * FROM product'; // remplace "products" par le vrai nom de ta table
+  db.query(sql, (err, results) => {
+    if (err) return callback(err);
+    callback(null, results);
+  });
+};
+
 module.exports = {
   createProduct,
-  deleteProduct
+  deleteProduct,
+  getAllProducts
 };

@@ -75,4 +75,17 @@ router.post('/addProduct', upload.single('image'), productController.createProdu
  */
 router.delete('/deleteProduct/:idProduct', productController.deleteProduct);
 
+/**
+ * @swagger
+ * /allProducts:
+ *   get:
+ *     summary: Récupérer tous les produits
+ *     responses:
+ *       200:
+ *         description: Liste des produits récupérée avec succès.
+ *       500:
+ *         description: Erreur serveur.
+ */
+router.get('/allProducts', productController.getAllProducts);
+
 module.exports = router;
