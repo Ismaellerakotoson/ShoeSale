@@ -1,4 +1,6 @@
 import React from 'react'
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 import Header from '../../layouts/Header'
 import '../../assets/theme.css'
 import hero from '../../assets/images/hero-img.png'
@@ -7,8 +9,29 @@ import product2 from '../../assets/images/p2.png'
 import product3 from '../../assets/images/p3.png'
 import product4 from '../../assets/images/p4.png'
 import Footer from '../../layouts/Footer'
+import { Navigate, useNavigate } from 'react-router-dom';
 
 export default function Home() {
+    const [products, setProducts] = useState([]);
+    const navigate = useNavigate();
+    
+    useEffect(() => {
+    const fetchProducts = async () => {
+        try {
+            const res = await axios.get('http://localhost:5000/api/product/allProducts');
+            setProducts(res.data);
+        } catch (err) {
+            console.error("Erreur lors de la récupération des produits:", err);
+        }
+    };
+    fetchProducts();
+    }, []);
+
+    const handleClick = (idProduct)=>{
+        console.log("id selection",idProduct);
+        navigate(`/product/${idProduct}`);
+    }
+
   return (
     <div id='index'>
       <Header/>
@@ -34,48 +57,24 @@ export default function Home() {
 
             <article className="overflow-auto">
                 <h1 className="f-28 mt-10 font-bold">Explore our latest drops</h1>
-                <div className="mt-5 flex gap-6 lg:gap-5">
-                    <div className="h-390">
-                        <div className="w-195 bg-product rounded-lg lg:w-[210px] ">
-                            <img src={product1} alt="no-img" className=""/>
-                        </div>
-                        <div className="product-desc mt-23">
-                            <p className="font-bold">off-white</p>
-                            <p className="f-14 text-gray-500">Out Of Office "Ooo" sneakers</p>
-                            <p className="font-weight-500 mt-2">$775</p>
-                        </div>
+                    <div className="mt-5 flex gap-6 lg:gap-5 overflow-x-auto">
+                        {products.map((product, index) => (
+                            <div key={index} className="h-390 min-w-[200px]">
+                            <div className="w-195 bg-product rounded-lg lg:w-[210px]" onClick={()=>handleClick(product.idProduct)}>
+                                <img
+                                src={`http://localhost:5000/uploads/${product.image}`}
+                                alt={product.nameProduct}
+                                className="w-full h-48 object-cover rounded"
+                                />
+                            </div>
+                            <div className="product-desc mt-4">
+                                <p className="font-bold">{product.brand}</p>
+                                <p className="f-14 text-gray-500">{product.nameProduct}</p>
+                                <p className="font-weight-500 mt-2">${product.price}</p>
+                            </div>
+                            </div>
+                        ))}
                     </div>
-                    <div className="">
-                        <div className="w-195 bg-product rounded-lg lg:w-[210px]">
-                            <img src={product2} alt="no-img" className=""/>
-                        </div>
-                        <div className="product-desc mt-23">
-                            <p className="font-bold">off-white</p>
-                            <p className="f-14 text-gray-500">Out Of Office "Ooo" sneakers</p>
-                            <p className="font-weight-500 mt-2">$775</p>
-                        </div>
-                    </div>
-                    <div className="">
-                        <div className="w-195 bg-product rounded-lg lg:w-[210px]">
-                            <img src={product3} alt="no-img" className=""/>
-                        </div>
-                        <div className="product-desc mt-23">
-                            <p className="font-bold">off-white</p>
-                            <p className="f-14 text-gray-500">Out Of Office "Ooo" sneakers</p>
-                            <p className="font-weight-500 mt-2">$775</p>
-                        </div>
-                    </div>
-                    <div className="">
-                        <div className="w-195 bg-product rounded-lg lg:w-[210px]">
-                            <img src={product4} alt="no-img" className=""/>
-                        </div>
-                        <div className="product-desc mt-23">
-                            <p className="font-bold">off-white</p>
-                            <p className="f-14 text-gray-500">Out Of Office "Ooo" sneakers</p>
-                            <p className="font-weight-500 mt-2">$775</p>
-                        </div>
-                    </div>
-                </div>
                 <div className="slide flex w-full bg-red-500">
                  
                 </div>

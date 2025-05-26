@@ -42,8 +42,19 @@ const deleteProduct = (req, res) => {
   });
 };
 
+const getAllProducts = (req, res) => {
+  productModel.getAllProducts((err, products) => {
+    if (err) {
+      console.error('Erreur lors de la récupération des produits:', err);
+      return res.status(500).json({ error: 'Erreur serveur.' });
+    }
+
+    res.status(200).json(products);
+  });
+};
 
 module.exports = {
   createProduct,
-  deleteProduct
+  deleteProduct,
+  getAllProducts
 };
