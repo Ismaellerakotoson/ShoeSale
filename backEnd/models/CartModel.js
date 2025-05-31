@@ -40,7 +40,34 @@ const deleteInCart = (id , callback) =>{
   }
 }
 
+const getUserCart = (id, callback) => {
+  const sql = `
+    SELECT 
+      cart.idCart,
+      cart.idUser,
+      cart.quantity,
+      cart.price AS cartPrice,
+      product.idProduct,
+      product.nameProduct,
+      product.brand,
+      product.image,
+      product.price AS productPrice
+    FROM cart
+    JOIN product ON cart.idProduct = product.idProduct
+    WHERE cart.idUser = ?
+  `;
+
+  db.query(sql, [id], (err, results) => {
+    if (err) {
+      console.error("Erreur MySQL :", err);
+      return callback(err, null);
+    }
+    callback(null, results);
+  });
+};
+
 module.exports = {
   addInCart,
-  deleteInCart
+  deleteInCart,
+  getUserCart
 };

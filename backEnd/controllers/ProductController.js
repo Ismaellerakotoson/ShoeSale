@@ -53,8 +53,30 @@ const getAllProducts = (req, res) => {
   });
 };
 
+const getOneProduct = (req, res) => {
+  const idProduct = req.params.idProduct;
+
+  if (!idProduct) {
+    return res.status(400).json({ error: "ID du produit manquant." });
+  }
+
+  productModel.getOneProduct(idProduct, (err, result) => {
+    if (err) {
+      return res.status(500).json({ error: "Erreur lors de la récupération du produit." });
+    }
+
+    if (!result || result.length === 0) {
+      return res.status(404).json({ error: "Produit introuvable." });
+    }
+
+    res.status(200).json({ message: "Produit récupéré avec succès.", product: result[0] });
+  });
+};
+
+
 module.exports = {
   createProduct,
   deleteProduct,
-  getAllProducts
+  getAllProducts,
+  getOneProduct
 };

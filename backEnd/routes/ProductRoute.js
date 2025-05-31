@@ -88,4 +88,26 @@ router.delete('/deleteProduct/:idProduct', productController.deleteProduct);
  */
 router.get('/allProducts', productController.getAllProducts);
 
+/**
+ * @swagger
+ * /oneProduct/{idProduct}:
+ *   get:
+ *     summary: Récupérer un produit par ID
+ *     parameters:
+ *       - in: path
+ *         name: idProduct
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: ID du produit à Récupérer
+ *     responses:
+ *       200:
+ *         description: Produit récupérer avec succès.
+ *       400:
+ *         description: ID du produit manquant.
+ *       500:
+ *         description: Erreur serveur.
+ */
+router.get('/oneProduct/:idProduct', productController.getOneProduct);
+
 module.exports = router;

@@ -61,4 +61,50 @@ const cartController = require('../controllers/CartController');
 router.post('/addToCart', cartController.addInCart);
 router.delete('/deleteToCart/:idCart', cartController.deleteInCart);
 
+/**
+ * @swagger
+ * /allCart/{idUser}:
+ *   get:
+ *     tags: [Cart]
+ *     summary: Récupérer les cartes par ID utilisateurs
+ *     parameters:
+ *       - in: path
+ *         name: idUser
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: ID Utilisateur à Récupérer
+ *     responses:
+ *       200:
+ *         description: Produit du panier récupérer avec succès.
+ *       400:
+ *         description: ID Utilisateur manquant.
+ *       500:
+ *         description: Erreur serveur.
+ */
+router.get('/allCart/:idUser', cartController.getUserCart);
+
+/**
+ * @swagger
+ * /deleteInCart/{idCart}:
+ *   delete:
+ *     tags: [Cart]
+ *     summary: Supprimer les produits du panier par ID carte
+ *     parameters:
+ *       - in: path
+ *         name: idCart
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: ID carte à Récupérer
+ *     responses:
+ *       200:
+ *         description: Produit du panier récupérer avec succès.
+ *       400:
+ *         description: ID panier manquant.
+ *       500:
+ *         description: Erreur serveur.
+ */
+router.delete('/deleteInCart/:idCart', cartController.deleteInCart);
+
 module.exports = router;

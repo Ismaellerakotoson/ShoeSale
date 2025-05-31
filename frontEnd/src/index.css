@@ -1,2 +1,5 @@
 @import "tailwindcss";
 
+section.product-img.box-shadow.shadow-xl.rounded-3xl.md\:w-400.md\:flex-1 {
+    height: 400px;
+}

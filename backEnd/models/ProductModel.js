@@ -47,8 +47,17 @@ const getAllProducts = (callback) => {
   });
 };
 
+const getOneProduct = (id,callback) => {
+  const sql = 'SELECT * FROM product WHERE idProduct= ?'; // remplace "products" par le vrai nom de ta table
+  db.query(sql, [id], (err, results) => {
+    if (err) console.error("Erreur MySQL :", err);
+    callback(null, results);
+  });
+};
+
 module.exports = {
   createProduct,
   deleteProduct,
-  getAllProducts
+  getAllProducts,
+  getOneProduct
 };
