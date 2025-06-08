@@ -35,6 +35,7 @@ const cartController = require('../controllers/CartController');
  *       400:
  *         description: Champs manquants
  */
+router.post('/addToCart', cartController.addInCart);
 
 /**
  * @swagger
@@ -58,7 +59,7 @@ const cartController = require('../controllers/CartController');
  *         description: Erreur serveur
  */
 
-router.post('/addToCart', cartController.addInCart);
+
 router.delete('/deleteToCart/:idCart', cartController.deleteInCart);
 
 /**
@@ -106,5 +107,36 @@ router.get('/allCart/:idUser', cartController.getUserCart);
  *         description: Erreur serveur.
  */
 router.delete('/deleteInCart/:idCart', cartController.deleteInCart);
+
+/**
+ * @swagger
+ * /cartCount/{idUser}:
+ *   get:
+ *     tags: [Cart]
+ *     summary: Obtenir le nombre total de produits dans le panier par utilisateur
+ *     parameters:
+ *       - in: path
+ *         name: idUser
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: ID de l'utilisateur
+ *     responses:
+ *       200:
+ *         description: Nombre total de produits récupéré avec succès.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 totalItems:
+ *                   type: integer
+ *       400:
+ *         description: ID utilisateur manquant.
+ *       500:
+ *         description: Erreur serveur.
+ */
+router.get('/cartCount/:idUser', cartController.getCartCountByUser);
+
 
 module.exports = router;

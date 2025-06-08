@@ -9,7 +9,7 @@ import product2 from '../../assets/images/p2.png'
 import product3 from '../../assets/images/p3.png'
 import product4 from '../../assets/images/p4.png'
 import Footer from '../../layouts/Footer'
-import { Navigate, useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate, useParams } from 'react-router-dom';
 
 export default function Home() {
     const [products, setProducts] = useState([]);
@@ -36,7 +36,7 @@ export default function Home() {
     <div id='index'>
       <Header/>
         <div className="container mx-auto p-5 overflow-hidden lg:mx-auto lg:w-[77%]">
-            <div className="heros flex flex-col text-center items-center bg-hero p-3 rounded-3xl mx-auto lg:items-start lg:text-left lg:flex-row lg:py-10 lg:px-5">
+           <div className="heros flex flex-col text-center items-center bg-hero p-3 rounded-3xl mx-auto lg:items-start lg:text-left lg:flex-row lg:py-10 lg:px-5 animate-fadeInUp">
                 <div className="flex-1 lg:hidden">
                     <img src={hero} alt="no-img" className="w-208 mx-auto"/>
                 </div>

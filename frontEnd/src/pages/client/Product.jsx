@@ -3,6 +3,7 @@ import Header from '../../layouts/Header';
 import Footer from '../../layouts/Footer';
 import axios from 'axios';
 import { Navigate, useNavigate, useParams } from 'react-router-dom';
+import ViewCart from '../../components/ViewCart';
 
 export default function Product() {
   const { id } = useParams();
@@ -74,7 +75,7 @@ export default function Product() {
 
   return (
     <div id="Product">
-      <Header />
+      <Header idUser={idUser}/>
       <div className="contain p-5 lg:mx-[12%]">
         <div className="block">
           <form onSubmit={handleSubmitCart} className="md:flex gap-5">

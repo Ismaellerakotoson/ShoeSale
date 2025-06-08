@@ -3,3 +3,22 @@
 section.product-img.box-shadow.shadow-xl.rounded-3xl.md\:w-400.md\:flex-1 {
     height: 400px;
 }
+
+.notification{
+    background-color: #EC5E2A;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeInUp {
+  animation: fadeInUp 0.8s ease-out forwards;
+}

@@ -66,8 +66,28 @@ const getUserCart = (id, callback) => {
   });
 };
 
+const getCartCountByUser = (idUser, callback) => {
+  const sql = `
+    SELECT SUM(quantity) AS totalItems
+    FROM cart
+    WHERE idUser = ?
+  `;
+
+  db.query(sql, [idUser], (err, results) => {
+    if (err) {
+      console.error("Erreur MySQL :", err);
+      return callback(err, null);
+    }
+
+    const totalItems = results[0]?.totalItems || 0;
+    callback(null, totalItems);
+  });
+};
+
+
 module.exports = {
   addInCart,
   deleteInCart,
-  getUserCart
+  getUserCart,
+  getCartCountByUser
 };

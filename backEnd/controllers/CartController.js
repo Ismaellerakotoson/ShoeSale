@@ -50,9 +50,28 @@ const getUserCart = (req, res) => {
   });
 };
 
+const getCartCountByUser = (req, res) => {
+  const idUser = req.params.idUser;
+
+  if (!idUser) {
+    return res.status(400).json({ error: "ID de l'utilisateur manquant." });
+  }
+
+  cartModel.getCartCountByUser(idUser, (err, count) => {
+    if (err) {
+      console.error('Erreur lors du comptage des produits :', err);
+      return res.status(500).json({ error: 'Erreur serveur.' });
+    }
+
+    res.status(200).json({ totalItems: count });
+  });
+};
+
+
 
 module.exports = {
   addInCart,
   deleteInCart,
-  getUserCart
+  getUserCart,
+  getCartCountByUser
 };
