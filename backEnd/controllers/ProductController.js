@@ -1,25 +1,27 @@
 const productModel = require('../models/ProductModel');
 
 const createProduct = (req, res) => {
-  const { nameProduct, price, brand, description, features, quantity } = req.body;
+  const { nameProduct, price, brand, description, quantity } = req.body;
   const image = req.file ? req.file.filename : null;
+  let features = req.body.features;
 
   if (!nameProduct || !price || !brand || !description || !features || !quantity || !image) {
     return res.status(400).json({ error: 'Tous les champs sont requis.' });
   }
 
-  if (!Array.isArray(features)) {
-    return res.status(400).json({ error: "'features' doit être un tableau." });
-  }
+  if (typeof features === 'string') {
+  features = features.split(',').map(f => f.trim());
+}
+
+  const featuresString = JSON.stringify(features);
 
   productModel.createProduct(
-    { nameProduct, price, brand, description, features, quantity, image },
+    { nameProduct, price, brand, description, features: featuresString, quantity, image },
     (err, result) => {
       if (err) {
         console.error('Erreur SQL:', err);
         return res.status(500).json({ error: 'Erreur serveur.' });
       }
-
       res.status(201).json({ message: 'Produit créé avec succès.', productId: result.insertId });
     }
   );

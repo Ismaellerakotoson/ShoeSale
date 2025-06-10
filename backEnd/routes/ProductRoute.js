@@ -27,18 +27,25 @@ const upload = require("../middlewares/upload")
  *             properties:
  *               nameProduct:
  *                 type: string
+ *                 example: "Chaussure cool"
  *               price:
  *                 type: number
+ *                 example: 49.99
  *               brand:
  *                 type: string
+ *                 example: "Nike"
  *               description:
  *                 type: string
+ *                 example: "Chaussures confortables et stylées"
  *               features:
  *                 type: array
- *                 items:
- *                   type: string
+ *                 description: >
+ *                   Chaîne JSON représentant un tableau de caractéristiques, par exemple :  
+ *                   ["Confortable", "style", "simple"]
+ *                 example: ["Confortable", "style", "simple"]
  *               quantity:
  *                 type: integer
+ *                 example: 12
  *               image:
  *                 type: string
  *                 format: binary
@@ -51,6 +58,7 @@ const upload = require("../middlewares/upload")
  *         description: Erreur serveur.
  */
 router.post('/addProduct', upload.single('image'), productController.createProduct);
+
 
 
 /**
