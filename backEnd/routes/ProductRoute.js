@@ -1,13 +1,21 @@
 const express = require('express');
 const router = express.Router();
 const productController = require('../controllers/ProductController');
-const upload = require("../middlewares/upload")
+const upload = require("../middlewares/upload");
+
+/**
+ * @swagger
+ * tags:
+ *   name: Product
+ *   description: Gestion des produits
+ */
 
 /**
  * @swagger
  * /addProduct:
  *   post:
  *     summary: Ajouter un nouveau produit
+ *     tags: [Product]
  *     consumes:
  *       - multipart/form-data
  *     requestBody:
@@ -39,10 +47,9 @@ const upload = require("../middlewares/upload")
  *                 example: "Chaussures confortables et stylées"
  *               features:
  *                 type: array
- *                 description: >
- *                   Chaîne JSON représentant un tableau de caractéristiques, par exemple :  
- *                   ["Confortable", "style", "simple"]
- *                 example: ["Confortable", "style", "simple"]
+ *                 items:
+ *                   type: string
+ *                 example: ["Confortable", "Style", "Simple"]
  *               quantity:
  *                 type: integer
  *                 example: 12
@@ -59,13 +66,12 @@ const upload = require("../middlewares/upload")
  */
 router.post('/addProduct', upload.single('image'), productController.createProduct);
 
-
-
 /**
  * @swagger
  * /deleteProduct/{idProduct}:
  *   delete:
  *     summary: Supprimer un produit par ID
+ *     tags: [Product]
  *     parameters:
  *       - in: path
  *         name: idProduct
@@ -88,6 +94,7 @@ router.delete('/deleteProduct/:idProduct', productController.deleteProduct);
  * /allProducts:
  *   get:
  *     summary: Récupérer tous les produits
+ *     tags: [Product]
  *     responses:
  *       200:
  *         description: Liste des produits récupérée avec succès.
@@ -101,16 +108,17 @@ router.get('/allProducts', productController.getAllProducts);
  * /oneProduct/{idProduct}:
  *   get:
  *     summary: Récupérer un produit par ID
+ *     tags: [Product]
  *     parameters:
  *       - in: path
  *         name: idProduct
  *         required: true
  *         schema:
  *           type: integer
- *         description: ID du produit à Récupérer
+ *         description: ID du produit à récupérer
  *     responses:
  *       200:
- *         description: Produit récupérer avec succès.
+ *         description: Produit récupéré avec succès.
  *       400:
  *         description: ID du produit manquant.
  *       500:
