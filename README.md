@@ -1,3 +1,8 @@
+> ⚠️ **Remarque importante :**  
+> En raison de restrictions d'accès sur mon ancien compte GitHub (`ismaelle928`), ce dernier n’est désormais plus accessible publiquement.  
+> Ainsi, afin d’assurer la bonne accessibilité du projet, j’ai pris l’initiative de créer un nouveau compte GitHub (ce compte).  
+> Le présent dépôt a été importé depuis l’ancien compte vers ce nouveau compte pour permettre un partage correct du code source.
+
 # 🛍️ SUN.CO – Application Web E-commerce de Chaussures
 
 Développé avec **React + Vite**, **TailwindCSS**, **Node.js**, **Express**, et **MySQL**  
