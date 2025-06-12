@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const orderItemController = require('../controllers/OrderItemController');
 
+// Ajoute un produit à une commande existante
 /**
  * @swagger
  * /addOrderItem:

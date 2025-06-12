@@ -1,5 +1,6 @@
 const db = require('../config/db');
 
+// Ajoute un produit à une commande existante
 const addOrderItem = (item, callback) => {
   const { idOrders, idProduct, quantity, price, total_price } = item;
 

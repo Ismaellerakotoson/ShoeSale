@@ -1,5 +1,6 @@
 const db = require('../config/db');
 
+// Crée un nouveau produit avec ses détails et son image
 const createProduct = (product, callback) => {
   const { nameProduct, price, brand, description, features, quantity, image } = product;
   const jsonFeatures = JSON.stringify(features);
@@ -21,6 +22,7 @@ const createProduct = (product, callback) => {
   }
 };
 
+// Supprime un produit existant par son identifiant
 const deleteProduct = (id, callback) => {
   const sql = "DELETE FROM product WHERE idProduct = ?";
 
@@ -39,16 +41,18 @@ const deleteProduct = (id, callback) => {
   }
 };
 
+// Récupère la liste de tous les produits disponibles
 const getAllProducts = (callback) => {
-  const sql = 'SELECT * FROM product'; // remplace "products" par le vrai nom de ta table
+  const sql = 'SELECT * FROM product';
   db.query(sql, (err, results) => {
     if (err) return callback(err);
     callback(null, results);
   });
 };
 
+// Récupère les détails d’un produit spécifique par son identifiant
 const getOneProduct = (id,callback) => {
-  const sql = 'SELECT * FROM product WHERE idProduct= ?'; // remplace "products" par le vrai nom de ta table
+  const sql = 'SELECT * FROM product WHERE idProduct= ?';
   db.query(sql, [id], (err, results) => {
     if (err) console.error("Erreur MySQL :", err);
     callback(null, results);

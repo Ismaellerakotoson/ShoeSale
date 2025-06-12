@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const cartController = require('../controllers/CartController');
 
-
+// Ajoute un produit dans le panier d’un utilisateur
 /**
  * @swagger
  * /addToCart:
@@ -37,31 +37,7 @@ const cartController = require('../controllers/CartController');
  */
 router.post('/addToCart', cartController.addInCart);
 
-/**
- * @swagger
- * /deleteUser/{idUser}:
- *   delete:
- *     summary: Supprimer un utilisateur
- *     tags: [Utilisateur]
- *     parameters:
- *       - in: path
- *         name: idUser
- *         required: true
- *         schema:
- *           type: integer
- *         description: ID de l'utilisateur
- *     responses:
- *       200:
- *         description: Utilisateur supprimé
- *       400:
- *         description: ID manquant
- *       500:
- *         description: Erreur serveur
- */
-
-
-router.delete('/deleteToCart/:idCart', cartController.deleteInCart);
-
+// Récupère le contenu du panier d’un utilisateur, avec détails des produits associés
 /**
  * @swagger
  * /allCart/{idUser}:
@@ -85,6 +61,7 @@ router.delete('/deleteToCart/:idCart', cartController.deleteInCart);
  */
 router.get('/allCart/:idUser', cartController.getUserCart);
 
+// Supprime un produit du panier selon l’id du panier (idCart)
 /**
  * @swagger
  * /deleteInCart/{idCart}:
@@ -108,6 +85,31 @@ router.get('/allCart/:idUser', cartController.getUserCart);
  */
 router.delete('/deleteInCart/:idCart', cartController.deleteInCart);
 
+// Supprime tous les produits du panier pour un utilisateur donné (idUser)
+/**
+ * @swagger
+ * /deleteAllInCart/{idUser}:
+ *   delete:
+ *     tags: [Cart]
+ *     summary: Supprimer les produits du panier par ID utilisateur
+ *     parameters:
+ *       - in: path
+ *         name: idUser
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: ID utilisateur à Récupérer
+ *     responses:
+ *       200:
+ *         description: Produits du panier récupérer avec succès.
+ *       400:
+ *         description: ID utilisateur manquant.
+ *       500:
+ *         description: Erreur serveur.
+ */
+router.delete('/deleteAllInCart/:idUser', cartController.deleteAllInCart);
+
+// Récupère le nombre total d’articles dans le panier d’un utilisateur
 /**
  * @swagger
  * /cartCount/{idUser}:
@@ -137,6 +139,5 @@ router.delete('/deleteInCart/:idCart', cartController.deleteInCart);
  *         description: Erreur serveur.
  */
 router.get('/cartCount/:idUser', cartController.getCartCountByUser);
-
 
 module.exports = router;

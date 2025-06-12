@@ -1,5 +1,6 @@
 const db = require('../config/db');
 
+// Crée un nouvel utilisateur avec ses informations
 const createUser = (user, callback) => {
   const { firstName, email, password, role } = user;
   const sql = "INSERT INTO user (firstName, email, password, role) VALUES (?, ?, ?, ?)";
@@ -20,6 +21,7 @@ const createUser = (user, callback) => {
   }
 };
 
+// Supprime un utilisateur existant par son identifiant
 const deleteUser = (id , callback) =>{
   const idUser = id;
   const sql = "DELETE FROM user WHERE idUser = ?"

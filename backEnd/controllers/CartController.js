@@ -1,5 +1,6 @@
 const cartModel = require('../models/CartModel');
 
+// Ajoute un produit dans le panier d'un utilisateur
 const addInCart = (req, res) => {
   const { idUser, idProduct , quantity , price } = req.body;
   const image = req.file ? req.file.filename : null;
@@ -21,7 +22,7 @@ const addInCart = (req, res) => {
   );
 };
 
-
+// Supprime un produit spécifique du panier
 const deleteInCart = (req, res) => {
   const idCart = req.params.idCart;
 
@@ -38,6 +39,24 @@ const deleteInCart = (req, res) => {
   });
 };
 
+// Supprime tous les produits dans le panier d'un utilisateur
+const deleteAllInCart = (req, res) => {
+  const idUser = req.params.idUser;
+
+  if (!idUser) {
+    return res.status(400).json({ error: "ID d'utilisateur manquant." });
+  }
+
+  cartModel.deleteAllInCart(idUser, (err, result) => {
+    if (err) {
+      return res.status(500).json({ error: "Erreur lors de la suppression des produits." });
+    }
+
+    res.status(200).json({ message: "Produits dans la carte supprimés avec succès.", result });
+  });
+};
+
+// Récupère tous les produits dans le panier d'un utilisateur
 const getUserCart = (req, res) => {
   const idUser = req.params.idUser;
   cartModel.getUserCart(idUser,(err, products) => {
@@ -50,6 +69,7 @@ const getUserCart = (req, res) => {
   });
 };
 
+// Compte le nombre total de produits dans le panier d'un utilisateur
 const getCartCountByUser = (req, res) => {
   const idUser = req.params.idUser;
 
@@ -72,6 +92,7 @@ const getCartCountByUser = (req, res) => {
 module.exports = {
   addInCart,
   deleteInCart,
+  deleteAllInCart,
   getUserCart,
   getCartCountByUser
 };

@@ -12,7 +12,7 @@ const storage = multer.diskStorage({
   },
 });
 
-// Filtres de type MIME si besoin (ex: uniquement images)
+// Filtres de type MIME
 const fileFilter = (req, file, cb) => {
   const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg'];
   if (allowedTypes.includes(file.mimetype)) {

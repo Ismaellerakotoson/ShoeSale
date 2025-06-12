@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/UserController');
 
-
+// Crée un nouvel utilisateur avec ses informations
 /**
  * @swagger
  * /addUser:
@@ -36,6 +36,7 @@ const userController = require('../controllers/UserController');
  *         description: Champs manquants
  */
 
+// Supprime un utilisateur existant par son identifiant
 /**
  * @swagger
  * /deleteUser/{idUser}:

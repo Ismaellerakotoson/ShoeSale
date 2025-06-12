@@ -1,5 +1,6 @@
 const orderItemModel = require('../models/OrderItemModel');
 
+// Ajoute un produit à une commande existante
 const addOrderItem = (req, res) => {
   const { idOrders, idProduct, quantity, price } = req.body;
 

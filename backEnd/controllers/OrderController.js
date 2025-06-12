@@ -1,5 +1,6 @@
 const orderModel = require('../models/OrderModel');
 
+// Ajoute une nouvelle commande pour un utilisateur
 const addOrder = (req, res) => {
   const { idUser, subtotal, shipping_cost, tax, discount, total, statu } = req.body;
   const created_at = new Date();

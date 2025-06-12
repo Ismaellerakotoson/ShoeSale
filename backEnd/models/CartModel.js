@@ -1,5 +1,6 @@
 const db = require('../config/db');
 
+// Ajoute un produit dans le panier d’un utilisateur
 const addInCart = (user, callback) => {
   const { idUser, idProduct, quantity, price } = user;
   const sql = "INSERT INTO cart (idUser, idProduct, quantity, price) VALUES (?, ?, ?, ?)";
@@ -20,6 +21,7 @@ const addInCart = (user, callback) => {
   }
 };
 
+// Supprime un produit du panier selon l’id du panier (idCart)
 const deleteInCart = (id , callback) =>{
   const idCart = id;
   const sql = "DELETE FROM cart WHERE idCart = ?"
@@ -40,6 +42,28 @@ const deleteInCart = (id , callback) =>{
   }
 }
 
+// Supprime tous les produits du panier pour un utilisateur donné (idUser)
+const deleteAllInCart = (id , callback) =>{
+  const idUser = id;
+  const sql = "DELETE FROM cart WHERE idUser = ?"
+
+  try{
+    db.query(sql, [idUser] , (err, result)=>{
+      if (err){
+        console.error("Erreur MySQL :", err);
+        callback(err, null)
+      } else {
+        console.log("Tous supprimés du panier avec succès !");
+        callback(null, result);
+      }
+    })
+  } catch (error){
+    console.err("Erreur inattendue:", error);
+    callback(error, null)
+  }
+}
+
+// Récupère le contenu du panier d’un utilisateur, avec détails des produits associés
 const getUserCart = (id, callback) => {
   const sql = `
     SELECT 
@@ -66,6 +90,7 @@ const getUserCart = (id, callback) => {
   });
 };
 
+// Récupère le nombre total d’articles dans le panier d’un utilisateur
 const getCartCountByUser = (idUser, callback) => {
   const sql = `
     SELECT SUM(quantity) AS totalItems
@@ -88,6 +113,7 @@ const getCartCountByUser = (idUser, callback) => {
 module.exports = {
   addInCart,
   deleteInCart,
+  deleteAllInCart,
   getUserCart,
   getCartCountByUser
 };

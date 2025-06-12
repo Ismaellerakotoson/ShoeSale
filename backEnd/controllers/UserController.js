@@ -1,5 +1,6 @@
 const userModel = require('../models/UserModel');
 
+// Crée un nouvel utilisateur avec ses informations
 const createUser = (req, res) => {
   const { firstName, email, password, role } = req.body;
 
@@ -17,6 +18,7 @@ const createUser = (req, res) => {
   });
 };
 
+// Supprime un utilisateur existant par son identifiant
 const deleteUser = (req, res) => {
   const idUser = req.params.idUser;
 

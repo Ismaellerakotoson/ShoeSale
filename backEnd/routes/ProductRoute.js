@@ -10,6 +10,7 @@ const upload = require("../middlewares/upload");
  *   description: Gestion des produits
  */
 
+// Crée un nouveau produit avec ses détails et son image
 /**
  * @swagger
  * /addProduct:
@@ -48,7 +49,7 @@ const upload = require("../middlewares/upload");
  *               features:
  *                 type: array
  *                 items:
- *                   type: string
+ *                 description: Liste des caractéristiques
  *                 example: ["Confortable", "Style", "Simple"]
  *               quantity:
  *                 type: integer
@@ -64,8 +65,10 @@ const upload = require("../middlewares/upload");
  *       500:
  *         description: Erreur serveur.
  */
+
 router.post('/addProduct', upload.single('image'), productController.createProduct);
 
+// Supprime un produit existant par son identifiant
 /**
  * @swagger
  * /deleteProduct/{idProduct}:
@@ -89,6 +92,7 @@ router.post('/addProduct', upload.single('image'), productController.createProdu
  */
 router.delete('/deleteProduct/:idProduct', productController.deleteProduct);
 
+// Récupère la liste de tous les produits disponibles
 /**
  * @swagger
  * /allProducts:
@@ -103,6 +107,7 @@ router.delete('/deleteProduct/:idProduct', productController.deleteProduct);
  */
 router.get('/allProducts', productController.getAllProducts);
 
+// Récupère les détails d’un produit spécifique par son identifiant
 /**
  * @swagger
  * /oneProduct/{idProduct}:

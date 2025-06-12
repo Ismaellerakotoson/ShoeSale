@@ -33,6 +33,7 @@ Développer une application web de vente de chaussures en se basant sur la maque
 - ● [Axios](https://axios-http.com/)
 - ● [Framer Motion](https://www.framer.com/motion/) – Animations
 - ● [Lucide React](https://lucide.dev/) – Icônes modernes
+- ● [React Toastify](https://fkhadra.github.io/react-toastify/introduction) – Notifications élégantes
 
 ### Backend – Node.js + Express
 

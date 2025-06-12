@@ -7,7 +7,3 @@ section.product-img.box-shadow.shadow-xl.rounded-3xl.md\:w-400.md\:flex-1 {
 .notification{
     background-color: #EC5E2A;
 }
-
-.mt-5.flex.gap-6.md\:gap-5.overflow-x-auto {
-    gap: 64px;
-}

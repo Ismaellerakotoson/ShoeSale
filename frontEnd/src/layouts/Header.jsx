@@ -5,7 +5,7 @@ import Logo from '../components/Logo'
 export default function Header({idUser}) {
   return (
     <header id="header">
-      <div className="py-4 lg:mx-[13%] flex justify-between items-center">
+      <div className="py-4 px-4 lg:mx-[13%] flex justify-between items-center">
         <div className="flex items-center"> 
           <Logo/>
         </div>

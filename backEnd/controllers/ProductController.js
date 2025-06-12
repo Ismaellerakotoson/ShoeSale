@@ -1,17 +1,19 @@
 const productModel = require('../models/ProductModel');
 
+// Crée un nouveau produit avec ses détails et son image
 const createProduct = (req, res) => {
   const { nameProduct, price, brand, description, quantity } = req.body;
   const image = req.file ? req.file.filename : null;
   let features = req.body.features;
 
+  // Si un seul feature est envoyé, c’est une string ; s’il y en a plusieurs, c’est un tableau
+  if (typeof features === 'string') {
+    features = [features];
+  }
+
   if (!nameProduct || !price || !brand || !description || !features || !quantity || !image) {
     return res.status(400).json({ error: 'Tous les champs sont requis.' });
   }
-
-  if (typeof features === 'string') {
-  features = features.split(',').map(f => f.trim());
-}
 
   const featuresString = JSON.stringify(features);
 
@@ -27,7 +29,7 @@ const createProduct = (req, res) => {
   );
 };
 
-
+// Supprime un produit existant par son identifiant
 const deleteProduct = (req, res) => {
   const idProduct = req.params.idProduct;
 
@@ -44,6 +46,7 @@ const deleteProduct = (req, res) => {
   });
 };
 
+// Récupère la liste de tous les produits disponibles
 const getAllProducts = (req, res) => {
   productModel.getAllProducts((err, products) => {
     if (err) {
@@ -55,6 +58,7 @@ const getAllProducts = (req, res) => {
   });
 };
 
+// Récupère les détails d’un produit spécifique par son identifiant
 const getOneProduct = (req, res) => {
   const idProduct = req.params.idProduct;
 

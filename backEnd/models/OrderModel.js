@@ -1,5 +1,6 @@
 const db = require('../config/db');
 
+// Ajoute une nouvelle commande pour un utilisateur
 const addOrder = (orderData, callback) => {
   const { idUser, subtotal, shipping_cost, tax, discount, total, statu, created_at } = orderData;
 
