@@ -6,7 +6,6 @@
 # 🛍️ SUN.CO – Application Web E-commerce de Chaussures
 
 Développé avec **React + Vite**, **TailwindCSS**, **Node.js**, **Express**, et **MySQL**  
-Projet réalisé dans le cadre du module **Tech Web M1 – 2025**
 
 ---
 
@@ -87,8 +86,8 @@ Développer une application web de vente de chaussures en se basant sur la maque
 1. **Cloner le projet**
 
 ```bash
-git clone https://github.com/yr-tahirisoa/projet_m1-tect-web.git
-cd projet_m1-tect-web
+git clone https://github.com/Ismaellerakotoson/ShoeSale.git
+cd ShoeSale
 ```
 
 2. **Configurer la base de données**
@@ -143,9 +142,3 @@ npm run dev
 - ✔️ API REST documentée avec Swagger
 - ✔️ Fonctionnalités implémentées selon spécifications
 - ✔️ Responsive design avec animations
-
----
-
-## 📸 (Optionnel)
-
-Ajoutez ici des captures d’écran de l’application si vous en avez.
