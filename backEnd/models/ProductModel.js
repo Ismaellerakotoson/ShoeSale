@@ -59,9 +59,23 @@ const getOneProduct = (id,callback) => {
   });
 };
 
+//Recupere le quantite d'un produit
+const getProductQuantity = (id, callback) => {
+  const sql = 'SELECT quantity FROM product WHERE idProduct = ?';
+  db.query(sql, [id], (err, results) => {
+    if (err) {
+      console.error("Erreur MySQL :", err);
+      return callback(err);
+    }
+    callback(null, results);
+  });
+};
+
+
 module.exports = {
   createProduct,
   deleteProduct,
   getAllProducts,
-  getOneProduct
+  getOneProduct,
+  getProductQuantity
 };

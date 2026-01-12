@@ -131,4 +131,38 @@ router.get('/allProducts', productController.getAllProducts);
  */
 router.get('/oneProduct/:idProduct', productController.getOneProduct);
 
+// Récupère la quantité maximale disponible d’un produit spécifique
+/**
+ * @swagger
+ * /productQuantity/{idProduct}:
+ *   get:
+ *     summary: Récupérer la quantité maximale disponible d'un produit
+ *     tags: [Product]
+ *     parameters:
+ *       - in: path
+ *         name: idProduct
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: ID du produit dont on veut connaître la quantité
+ *     responses:
+ *       200:
+ *         description: Quantité maximale récupérée avec succès
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 maxQuantity:
+ *                   type: integer
+ *                   example: 5
+ *       400:
+ *         description: ID du produit manquant
+ *       404:
+ *         description: Produit introuvable
+ *       500:
+ *         description: Erreur serveur
+ */
+router.get('/productQuantity/:idProduct', productController.getProductQuantity);
+
 module.exports = router;

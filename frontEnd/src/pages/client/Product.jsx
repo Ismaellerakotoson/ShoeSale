@@ -83,14 +83,39 @@ export default function Product() {
     }
   };
 
-  // Incrémentation / Décrémentation de la quantité
-  const decrease = () => {
-    if (quantity > 1) setQuantity(quantity - 1);
+  const [maxQuantity, setMaxQuantity] = useState(1);
+
+  // Récupérer la quantité max depuis le backend
+ useEffect(() => {
+  if (!id) return; // ne fait rien si undefined
+
+  const fetchMaxQuantity = async () => {
+    try {
+      const res = await axios.get(`http://localhost:5000/api/product/productQuantity/${id}`);
+      console.log("Réponse API maxQuantity :", res.data);
+      setMaxQuantity(res.data.maxQuantity);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
+  fetchMaxQuantity();
+}, [id]);
+
+
   const increase = () => {
-    setQuantity(quantity + 1);
-  };
+  const q = parseInt(quantity); // assure qu’on travaille avec un nombre
+  if (q < maxQuantity) {
+    setQuantity(q + 1);
+  }
+};
+
+const decrease = () => {
+  const q = parseInt(quantity);
+  if (q > 1) {
+    setQuantity(q - 1);
+  }
+};
 
   // Animation Framer Motion
   const pageVariants = {
@@ -247,9 +272,13 @@ export default function Product() {
                   <button type="button" className="text-gray-500 cursor-pointer" onClick={decrease}>-</button>
                   <input
                     min="1"
+                    max={maxQuantity}
                     className="w-12 text-center border-x"
                     value={quantity}
-                    onChange={(e) => setQuantity(e.target.value)}
+                    onChange={(e) => {
+                      const val = parseInt(e.target.value);
+                      if (val >= 1 && val <= maxQuantity) setQuantity(val);
+                    }}
                   />
                   <button type="button" className='cursor-pointer' onClick={increase}>+</button>
                 </motion.div>

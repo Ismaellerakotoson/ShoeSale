@@ -46,9 +46,6 @@ Développer une application web de vente de chaussures en se basant sur la maque
 - ● [dotenv](https://www.npmjs.com/package/dotenv)
 - ● [CORS](https://www.npmjs.com/package/cors)
 - ● [express-validator](https://express-validator.github.io/)
-- ● [bcrypt](https://www.npmjs.com/package/bcrypt)
-- ● [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken)
-- ● [Multer](https://www.npmjs.com/package/multer)
 - ● [Swagger UI Express](https://www.npmjs.com/package/swagger-ui-express)
 
 ---
